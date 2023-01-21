@@ -1,5 +1,5 @@
 {
-  "name": "__MSG_title__",
+  "name": "Pinterest Enhanced",
   "version": "1.6",
   "description": "Pinterest Enhanced Experience - Fixed Height | Full Size images Download | Google Image Search | Arrow Keys Navigation through pins",
   "default_locale": "en",
@@ -23,7 +23,8 @@
     "scripting",
     "*://*.pinterest.com/*"
   ],
-  "web_accessible_resources": [{
+  "web_accessible_resources": [
+    {
       "resources": [
         "css/fixedHeight.css",
         "css/extraDownload.css",
@@ -35,6 +36,7 @@
       "matches": [
         "*://*.pinterest.com/*"
       ]
-    }],
+    }
+  ],
   "manifest_version": 3
 }
