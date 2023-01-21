@@ -87,20 +87,27 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 	        	if ( extra ) {
 		        	chrome.tabs.insertCSS(tab.id, {file : "css/extraDownload.css", runAt: "document_start"});
 	        	};
-	        	chrome.pageAction.setIcon({tabId: tabId, path:"img/iconON.png"});
-	        	chrome.pageAction.setTitle({tabId: tabId, title:chrome.i18n.getMessage("ON")});
+	        	chrome.action.setIcon({tabId: tabId, path:"img/iconON.png"});
+	        	chrome.action.setTitle({tabId: tabId, title:chrome.i18n.getMessage("ON")});
 	        } else {
-	        	chrome.pageAction.setIcon({tabId: tabId, path:"img/iconOFF.png"});
-	        	chrome.pageAction.setTitle({tabId: tabId, title:chrome.i18n.getMessage("OFF")});
+	        	chrome.action.setIcon({tabId: tabId, path:"img/iconOFF.png"});
+	        	chrome.action.setTitle({tabId: tabId, title:chrome.i18n.getMessage("OFF")});
 	        };
-	        chrome.pageAction.show(tabId);
+	        chrome.action.show(tabId);
 		} else if (changeInfo.status == "complete") {
 			window.addEventListener("storage",function(e) {
 				chrome.tabs.reload(tab.id);
 			},true);
 
 			if ( actived ) {
-        		chrome.tabs.executeScript(tab.id, { file: "js/inject.js", runAt: "document_start"});
+        		chrome.tabs.executeScript(tab.id, 
+					{ file: "js/inject.js", 
+					runAt: "document_start"
+				});
+				chrome.scripting.executeScript({
+					target: {tabId: tab.id},
+					files: ['js/inject.js']
+				  });
         	}
 
 		};
@@ -108,7 +115,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 });
 
 
-chrome.pageAction.onClicked.addListener(function(tab) {
+chrome.action.onClicked.addListener(function(tab) {
 	if (getOption('pin_grid') == "ON") {
 		chrome.tabs.create({url: "options.html"});
 	} else {

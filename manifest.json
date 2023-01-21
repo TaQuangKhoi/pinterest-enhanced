@@ -5,29 +5,36 @@
   "default_locale": "en",
   "short_name": "PinterestEnhanced",
   "author": "Lorenzo Zottar",
-  "icons": { "64": "img/iconON.png" },
+  "icons": {
+    "64": "img/iconON.png"
+  },
   "options_page": "options.html",
-  "page_action": {
+  "action": {
     "default_title": "Pinterest Enhanced Extension",
     "default_icon": "img/iconOFF.png"
   },
   "background": {
-    "scripts": ["js/bg.js"],
-    "persistent": true
+    "service_worker": "src/js/bg.js"
   },
   "permissions": [
     "tabs",
     "activeTab",
     "notifications",
+    "scripting",
     "*://*.pinterest.com/*"
   ],
-  "web_accessible_resources": [
-    "css/fixedHeight.css",
-    "css/extraDownload.css",
-    "ajs/inject.js",
-    "options.html",
-    "img/download.png",
-    "img/search.png"
-  ],
-  "manifest_version": 2
+  "web_accessible_resources": [{
+      "resources": [
+        "css/fixedHeight.css",
+        "css/extraDownload.css",
+        "ajs/inject.js",
+        "options.html",
+        "img/download.png",
+        "img/search.png"
+      ],
+      "matches": [
+        "*://*.pinterest.com/*"
+      ]
+    }],
+  "manifest_version": 3
 }
